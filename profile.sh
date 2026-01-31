@@ -1,5 +1,5 @@
-nvidia-smi --lock-gpu-clocks=1590
-nvidia-smi --lock-memory-clocks=5000
+# nvidia-smi --lock-gpu-clocks=1590
+# nvidia-smi --lock-memory-clocks=5000
 
 echo "Matrix size 1024x1024"
 echo "Kernel 1"
@@ -87,5 +87,5 @@ echo "cuBLAS HGEMM"
 ./build/runner 99 50 16384 16384 16384
 echo "------------------------------"
 
-nvidia-smi --reset-gpu-clocks
-nvidia-smi --reset-memory-clocks
+# nvidia-smi --reset-gpu-clocks
+# nvidia-smi --reset-memory-clocks

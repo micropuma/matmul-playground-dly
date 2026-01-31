@@ -4,9 +4,9 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package(CUDAToolkit REQUIRED)
 
-# turing arch, tesla t4
+# ampere arch
 if(NOT DEFINED CMAKE_CUDA_ARCHITECTURES)
-  set(CMAKE_CUDA_ARCHITECTURES 75)
+  set(CMAKE_CUDA_ARCHITECTURES 86)
 endif()
 
 file(GLOB SOURCES "src/kernel*.cu")
