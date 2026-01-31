@@ -85,27 +85,34 @@ void host_sgemm(sgemm_params params)
     half *B = params.B;
     half *C = params.C;
     half *D = params.D;
-    half alpha = params.alpha;
-    half beta = params.beta;
+
+    float alpha = params.alpha;
+    float beta  = params.beta;
+
     unsigned int M = params.M;
     unsigned int N = params.N;
     unsigned int K = params.K;
 
     for (int m = 0; m < M; m++)
     {
-    for (int n = 0; n < N; n++)
-    {
-        
-        half acc = 0.0f;
-        for (int k = 0; k < K; k++)
+        for (int n = 0; n < N; n++)
         {
-        acc += (A[m * K + k] * B[k * N + n]);
+            float acc = 0.0f;
+
+            for (int k = 0; k < K; k++)
+            {
+                float a = __half2float(A[m * K + k]);
+                float b = __half2float(B[k * N + n]);
+                acc += a * b;
+            }
+
+            float c = __half2float(C[m * N + n]);
+            float d = alpha * acc + beta * c;
+
+            D[m * N + n] = __float2half(d);
         }
-        D[m * N + n] = alpha * acc + (beta * C[m * N + n]);
-    }
     }
 }
-
 
 bool elementwise_isclose(half* a, half* b, int size, float atol = 0.5)
 {
